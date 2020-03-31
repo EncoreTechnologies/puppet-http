@@ -1,0 +1,43 @@
+{
+  "supports_noop": true,
+  "description": "Performs an HTTP GET against a URL and writes the body to a file",
+  "files": [
+    "http/lib/puppet_x/encore/http/client.rb",
+    "ruby_task_helper/files/task_helper.rb"
+  ],
+  "parameters": {
+    "url": {
+      "type": "String",
+      "description": "URL to invoke with a GET request"
+    },
+    "body": {
+      "type": "Optional[String]",
+      "description": "Body to insert into the GET request."
+    },
+    "headers": {
+      "type": "Optional[Hash]",
+      "description": "Hash of headers to send with the GET request"
+    },
+    "username": {
+      "type": "Optional[String]",
+      "description": "Username for basic auth"
+    },
+    "password": {
+      "type": "Optional[String]",
+      "description": "Password for basic auth",
+      "sensitive": true
+    },
+    "ssl": {
+      "type": "Optional[Boolean]",
+      "description": "Enable SSL (default = true)"
+    },
+    "ssl_verify": {
+      "type": "Optional[Boolean]",
+      "description": "Enable SSL verification (default = true)"
+    },
+    "redirect_limit": {
+      "type": "Optional[Integer]",
+      "description": "Number of redirects to follow (default = 10)"
+    }
+  }
+}

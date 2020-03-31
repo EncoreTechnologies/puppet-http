@@ -1,0 +1,6 @@
+{
+  "supports_noop": true,
+  "description": "Generic HTTP invocation. The method must be specified as a parameter",
+  "parameters": {
+  }
+}
