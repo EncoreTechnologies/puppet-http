@@ -20,11 +20,12 @@ module PuppetX::Http
       @headers = headers
     end
 
-    def execute(method, url, body: nil, headers: {}, redirect_limit: @redirect_limit)
+    def execute(method, url, body: nil, headers: {}, query: nil, redirect_limit: @redirect_limit)
       raise ArgumentError, 'HTTP redirect too deep' if redirect_limit.zero?
 
       # setup our HTTP class
       uri = URI.parse(url)
+      uri.query = URI.encode_www_form(query) if query
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = @ssl
       http.verify_mode = @ssl_verify
@@ -70,12 +71,20 @@ module PuppetX::Http
       false
     end
 
-    def get(url, body: nil, headers: @headers)
-      execute('get', url, body: body, headers: headers, redirect_limit: @redirect_limit)
+    def get(url, body: nil, headers: @headers, query: nil)
+      execute('get', url,
+              body: body,
+              headers: headers,
+              query: query,
+              redirect_limit: @redirect_limit)
     end
 
-    def post(url, body: nil, headers: @headers)
-      execute('post', url, body: body, headers: headers, redirect_limit: @redirect_limit)
+    def post(url, body: nil, headers: @headers, query: nil)
+      execute('post', url,
+              body: body,
+              headers: headers,
+              query: query,
+              redirect_limit: @redirect_limit)
     end
 
     def response_to_h(resp)
