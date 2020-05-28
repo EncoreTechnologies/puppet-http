@@ -79,19 +79,20 @@ module PuppetX::Http
     end
 
     def response_to_h(resp)
-      h = {
+      headers = {}
+      resp.each_header { |k, v| headers[k] = v }
+      body = if resp.body && headers['content-type'] == 'application/json'
+               JSON.parse(resp.body)
+             else
+               resp.body
+             end
+      {
         code: resp.code,
         message: resp.msg,
         uri: resp.uri,
-        headers: {},
+        headers: headers,
+        body: body,
       }
-      resp.each_header { |k, v| h[:headers][k] = v }
-      h[:body] = if resp.body && h[:headers]['content-type'] == 'application/json'
-                   JSON.parse(resp.body)
-                 else
-                   resp.body
-                 end
-      h
     end
   end
 end
