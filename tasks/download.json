@@ -12,8 +12,8 @@
     },
     "binary": {
       "type": "Optional[Boolean]",
-      "description": "True if we should write this as binary."
-      "default": false,
+      "description": "True if we should write this as binary.",
+      "default": false
     }
     "url": {
       "type": "String",
@@ -38,18 +38,18 @@
     },
     "ssl": {
       "type": "Optional[Boolean]",
-      "description": "Enable SSL (default = true)"
-      "default": true,
+      "description": "Enable SSL (default = true)",
+      "default": true
     },
     "ssl_verify": {
       "type": "Optional[Boolean]",
-      "description": "Enable SSL verification (default = true)"
-      "default": true,
+      "description": "Enable SSL verification (default = true)",
+      "default": true
     },
     "redirect_limit": {
       "type": "Optional[Integer]",
-      "description": "Number of redirects to follow (default = 10)"
-      "default": 10,
+      "description": "Number of redirects to follow (default = 10)",
+      "default": 10
     }
   }
 }
