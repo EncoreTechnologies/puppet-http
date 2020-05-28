@@ -1,5 +1,6 @@
 require 'net/https'
 require 'ipaddr'
+require 'json'
 require 'puppet_x'
 
 module PuppetX::Http
@@ -75,6 +76,22 @@ module PuppetX::Http
 
     def post(url, body: nil, headers: @headers)
       execute('post', url, body: body, headers: headers, redirect_limit: @redirect_limit)
+    end
+
+    def response_to_h(resp)
+      h = {
+        code: resp.code,
+        message: resp.msg,
+        uri: resp.uri,
+        headers: {},
+      }
+      resp.each_header { |k, v| h[:headers][k] = v }
+      h[:body] = if resp.body && h[:headers]['content-type'] == 'application/json'
+                   JSON.parse(resp.body)
+                 else
+                   resp.body
+                 end
+      h
     end
   end
 end
