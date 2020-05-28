@@ -6,6 +6,10 @@
     "ruby_task_helper/files/task_helper.rb"
   ],
   "parameters": {
+    "path": {
+      "type": "String",
+      "description": "Path where the file should be saved, this should include the file name."
+    },
     "url": {
       "type": "String",
       "description": "URL to invoke with a GET request"
@@ -38,6 +42,11 @@
     "redirect_limit": {
       "type": "Optional[Integer]",
       "description": "Number of redirects to follow (default = 10)"
+    },
+    "binary": {
+      "type": "Optional[Boolean]",
+      "description": "True if we should write this as binary."
+      "default": false,
     }
   }
 }

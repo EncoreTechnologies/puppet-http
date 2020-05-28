@@ -27,8 +27,10 @@ class HttpDownloadTask < TaskHelper
                                      ssl_verify: ssl_verify,
                                      redirect_limit: kwargs.fetch(:redirect_limit, 10))
 
-    response = http.get(url, body: body, headers: headers)
-    open("sample.flv", "wb") do |file|
+    resp = http.get(url, body: body, headers: headers)
+    file_opts = 'w'
+    file_opts += 'b' if kwargs[:binary]
+    open(kwargs[:path], file_opts) do |file|
       file.write(resp.body)
     end
   end
