@@ -2,7 +2,7 @@ require 'net/https'
 require 'ipaddr'
 require 'puppet_x'
 
-module PuppetX::HTTP
+module PuppetX::Http
   # Helper class for HTTP calls
   class Client
     def initialize(username: nil,
