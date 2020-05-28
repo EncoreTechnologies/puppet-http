@@ -2,5 +2,45 @@
   "supports_noop": true,
   "description": "Generic HTTP invocation. The method must be specified as a parameter",
   "parameters": {
+    "method": {
+      "type": "String",
+      "description": "HTTP method to invoke (GET, POST, DELETE, etc). Note, this is specifically NOT an Enum because, turns out, there are tons of these methods and i didn't want to hamstring people."
+    },
+    "url": {
+      "type": "String",
+      "description": "URL to invoke with a GET request"
+    },
+    "body": {
+      "type": "Optional[String]",
+      "description": "Body to insert into the GET request."
+    },
+    "headers": {
+      "type": "Optional[Hash]",
+      "description": "Hash of headers to send with the GET request"
+    },
+    "username": {
+      "type": "Optional[String]",
+      "description": "Username for basic auth"
+    },
+    "password": {
+      "type": "Optional[String]",
+      "description": "Password for basic auth",
+      "sensitive": true
+    },
+    "ssl": {
+      "type": "Optional[Boolean]",
+      "description": "Enable SSL (default = true)"
+      "default": true,
+    },
+    "ssl_verify": {
+      "type": "Optional[Boolean]",
+      "description": "Enable SSL verification (default = true)"
+      "default": true,
+    },
+    "redirect_limit": {
+      "type": "Optional[Integer]",
+      "description": "Number of redirects to follow (default = 10)"
+      "default": 10,
+    }
   }
 }

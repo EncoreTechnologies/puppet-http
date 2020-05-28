@@ -10,6 +10,11 @@
       "type": "String",
       "description": "Path where the file should be saved, this should include the file name."
     },
+    "binary": {
+      "type": "Optional[Boolean]",
+      "description": "True if we should write this as binary."
+      "default": false,
+    }
     "url": {
       "type": "String",
       "description": "URL to invoke with a GET request"
@@ -34,19 +39,17 @@
     "ssl": {
       "type": "Optional[Boolean]",
       "description": "Enable SSL (default = true)"
+      "default": true,
     },
     "ssl_verify": {
       "type": "Optional[Boolean]",
       "description": "Enable SSL verification (default = true)"
+      "default": true,
     },
     "redirect_limit": {
       "type": "Optional[Integer]",
       "description": "Number of redirects to follow (default = 10)"
-    },
-    "binary": {
-      "type": "Optional[Boolean]",
-      "description": "True if we should write this as binary."
-      "default": false,
+      "default": 10,
     }
   }
 }

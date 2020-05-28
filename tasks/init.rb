@@ -17,19 +17,12 @@ class HttpTask < TaskHelper
            **kwargs)
     add_module_lib_paths(kwargs[:_installdir])
     require 'puppet_x/encore/http/client'
-
-    ssl_verify = if kwargs.fetch(:ssl_verify, true)
-                   OpenSSL::SSL::VERIFY_PEER
-                 else
-                   OpenSSL::SSL::VERIFY_NONE
-                 end
     http = PuppetX::Http::Client.new(username: kwargs[:username],
                                      password: kwargs[:password],
-                                     ssl: kwargs.fetch(:ssl, true),
-                                     ssl_verify: ssl_verify,
-                                     redirect_limit: kwargs.fetch(:redirect_limit, 10))
-
-    response = http.get(url, body: body, headers: headers)
+                                     ssl: kwargs[:ssl],
+                                     ssl_verify: kwargs[:ssl_verify],
+                                     redirect_limit: kwargs[:redirect_limit])
+    response = http.execute(method, url, body: body, headers: headers)
     http.response_to_h(response)
   end
 end

@@ -15,18 +15,11 @@ class HttpDownloadTask < TaskHelper
            **kwargs)
     add_module_lib_paths(kwargs[:_installdir])
     require 'puppet_x/encore/http/client'
-
-    ssl_verify = if kwargs.fetch(:ssl_verify, true)
-                   OpenSSL::SSL::VERIFY_PEER
-                 else
-                   OpenSSL::SSL::VERIFY_NONE
-                 end
     http = PuppetX::Http::Client.new(username: kwargs[:username],
                                      password: kwargs[:password],
-                                     ssl: kwargs.fetch(:ssl, true),
-                                     ssl_verify: ssl_verify,
-                                     redirect_limit: kwargs.fetch(:redirect_limit, 10))
-
+                                     ssl: kwargs[:ssl],
+                                     ssl_verify: kwargs[:ssl_verify],
+                                     redirect_limit: kwargs[:redirect_limit])
     resp = http.get(url, body: body, headers: headers)
     file_opts = 'w'
     file_opts += 'b' if kwargs[:binary]

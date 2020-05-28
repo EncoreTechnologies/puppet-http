@@ -8,13 +8,13 @@ module PuppetX::HTTP
     def initialize(username: nil,
                    password: nil,
                    ssl: true,
-                   ssl_verify: OpenSSL::SSL::VERIFY_NONE,
+                   ssl_verify: true,
                    redirect_limit: 10,
                    headers: {})
       @username = username
       @password = password
       @ssl = ssl
-      @ssl_verify = ssl_verify
+      @ssl_verify = ssl_verify ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
       @redirect_limit = redirect_limit
       @headers = headers
     end
