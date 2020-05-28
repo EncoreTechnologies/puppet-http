@@ -14,7 +14,7 @@
       "type": "Optional[Boolean]",
       "description": "True if we should write this as binary.",
       "default": false
-    }
+    },
     "url": {
       "type": "String",
       "description": "URL to invoke with a GET request"
